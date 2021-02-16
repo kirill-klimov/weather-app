@@ -2,6 +2,7 @@ import React from 'react';
 import * as S from './city-search.styles';
 import { useAnimation } from 'framer-motion';
 import SearchBar from '../search-bar/search-bar.component';
+import Results from '../results/results.component';
 
 const CitySearch = ({setHidden}) => {
   const controls = useAnimation();
@@ -24,11 +25,14 @@ const CitySearch = ({setHidden}) => {
       animate={controls}
       variants={variants}
       transition={{ ease: "easeOut", duration: 0.25 }}>
+
       <S.CloseButtonContainer>
         <S.CloseButton onClick={() => handleClose()}>×</S.CloseButton>
       </S.CloseButtonContainer>
 
       <SearchBar />
+
+      <Results />
       
     </S.Container>
   );

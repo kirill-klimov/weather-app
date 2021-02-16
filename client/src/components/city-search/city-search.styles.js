@@ -14,7 +14,7 @@ export const Container = styled(motion.div)`
 
   display: flex;
   flex-direction: column;
-  row-gap: 50px;
+  row-gap: 25px;
   background-color: ${C.LightBlueGray};
 `;
 
@@ -31,6 +31,7 @@ export const CloseButton = styled.span`
   border-radius: 50%;
   cursor: pointer;
   padding: 0 14px 7px;
+  transform: translateX(15px);
   
   &:hover {
     background-color: ${C.Gray + '55'};

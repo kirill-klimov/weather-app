@@ -4,3 +4,7 @@ export const White = '#e4e3e8';
 export const CityTextGray = '#a09fb1';
 export const CityTextWhite = '#e7e7eb';
 export const InputGray = '#636677';
+export const ButtonBlue = '#3c47e9';
+export const DarkBlue = "#100e1d";
+export const UnitInactive = "#585676";
+export const Card = "#1e213a";
