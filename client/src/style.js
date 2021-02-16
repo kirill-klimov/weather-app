@@ -8,3 +8,4 @@ export const ButtonBlue = '#3c47e9';
 export const DarkBlue = "#100e1d";
 export const UnitInactive = "#585676";
 export const Card = "#1e213a";
+export const Yellow = "#ffec65";

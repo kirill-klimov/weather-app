@@ -2,8 +2,8 @@ import styled from 'styled-components';
 import * as C from '../../style';
 
 export const Container = styled.div`
-  width: 100%;
-  max-width: 450px;
+  flex-basis: 375px;
+  flex-grow: 1;
   background-color: ${C.LightBlueGray};
   height: 100vh;
   padding: 30px;
@@ -12,7 +12,12 @@ export const Container = styled.div`
   flex-direction: column;
   row-gap: 50px;
   overflow-x: hidden;
-  position: relative;
+  position: sticky;
+  top: 0;
+
+  @media screen and (max-width: 1232px) {
+    position: relative;
+  }
 `;
 
 export const ButtonsContainer = styled.div`
