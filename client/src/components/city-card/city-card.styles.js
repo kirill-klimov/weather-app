@@ -11,7 +11,7 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
   row-gap: 50px;
-  overflow-x: hidden;
+  overflow: hidden;
   position: sticky;
   top: 0;
 

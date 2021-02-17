@@ -9,3 +9,4 @@ export const DarkBlue = "#100e1d";
 export const UnitInactive = "#585676";
 export const Card = "#1e213a";
 export const Yellow = "#ffec65";
+export const Error = "#7676a7";
