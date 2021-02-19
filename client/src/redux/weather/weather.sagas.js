@@ -1,7 +1,6 @@
 import { WeatherActionTypes } from './weather.types';
 import { takeLatest, all, call, put } from 'redux-saga/effects';
 import axios from 'axios';
-import { getUserGeo } from '../../utils';
 import {
   queryDataSuccess,
   queryDataFailure,
@@ -71,28 +70,39 @@ function* initFetchDataStart () {
 
 
 function* _getUserGeo () {
-  const res = yield getUserGeo();
 
-  if (!res) return yield put(getUserGeoFailure({
-    error: true,
-    message: 'Unable to get location'
-  }));
+  const success = async (position) => {
+    const {latitude, longitude}  = position.coords;
+    const [lat, long] = [latitude, longitude];
 
-  if (res.error) return yield put(getUserGeoFailure(res));
-    
-  const { lat, long } = res;
+    const url = '/api/latlong';
 
-  const url = '/api/latlong';
-
-  try {
-    const { data } = yield axios.get(url, {
-      params: { lat, long }
-    });
-    yield put(setSearchMenu(true));
-    yield put(queryDataSuccess(data));
+    try {
+      const { data } = await axios.get(url, {
+        params: { lat, long }
+      });
+      await put(setSearchMenu(true));
+      await put(queryDataSuccess(data));
+    }
+    catch (error) {
+      await put(queryDataFailure(error));
+    }
   }
-  catch (error) {
-    yield put(queryDataFailure(error));
+
+  const error = async () => {
+    await put(getUserGeoFailure( { 
+      error: true, 
+      message: 'Unable to get location' 
+    } ));
+  }
+
+  if(!navigator.geolocation) {
+    yield put(getUserGeoFailure( { 
+      error: true, 
+      message: 'Geolocation is not supported by your browser' 
+    } ));
+  } else {
+    navigator.geolocation.getCurrentPosition(success, error);
   }
 }
 
