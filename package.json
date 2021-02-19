@@ -12,6 +12,6 @@
   "author": "Kirill Klimov",
   "license": "MIT",
   "scripts": {
-    "start": "nodemon server.js"
+    "start": "node server.js"
   }
 }
