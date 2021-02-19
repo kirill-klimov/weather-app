@@ -25,7 +25,6 @@ const weatherReducer = (state=init_state, action) => {
     case WeatherActionTypes.FETCH_DATA_START:
     case WeatherActionTypes.QUERY_DATA_START:
     case WeatherActionTypes.INIT_FETCH_DATA_START:
-    case WeatherActionTypes.GET_USER_GEO_START:
       return {
         ...state,
         loading: true,

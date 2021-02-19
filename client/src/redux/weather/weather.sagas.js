@@ -6,9 +6,7 @@ import {
   queryDataFailure,
   fetchDataSuccess,
   fetchDataFailure,
-  getUserGeoFailure,
 } from '../weather/weather.actions';
-import { setSearchMenu } from '../../redux/ui/ui.actions';
 
 
 // Find available locations
@@ -69,47 +67,6 @@ function* initFetchDataStart () {
 
 
 
-function* _getUserGeo () {
-
-  const success = async (position) => {
-    const {latitude, longitude}  = position.coords;
-    const [lat, long] = [latitude, longitude];
-
-    const url = '/api/latlong';
-
-    try {
-      const { data } = await axios.get(url, {
-        params: { lat, long }
-      });
-      await put(setSearchMenu(true));
-      await put(queryDataSuccess(data));
-    }
-    catch (error) {
-      await put(queryDataFailure(error));
-    }
-  }
-
-  const error = async () => {
-    await put(getUserGeoFailure( { 
-      error: true, 
-      message: 'Unable to get location' 
-    } ));
-  }
-
-  if(!navigator.geolocation) {
-    yield put(getUserGeoFailure( { 
-      error: true, 
-      message: 'Geolocation is not supported by your browser' 
-    } ));
-  } else {
-    navigator.geolocation.getCurrentPosition(success, error);
-  }
-}
-
-function* getUserGeoStart () {
-  yield takeLatest(WeatherActionTypes.GET_USER_GEO_START, _getUserGeo);
-}
-
 
 
 
@@ -118,7 +75,6 @@ function* weatherSaga() {
     call(queryDataStart),
     call(fetchDataStart),
     call(initFetchDataStart),
-    call(getUserGeoStart),
   ]);
 }
 

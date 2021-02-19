@@ -39,10 +39,6 @@ export const initFetchDataStart = () => ({
   type: WeatherActionTypes.INIT_FETCH_DATA_START
 })
 
-export const getUserGeoStart = () => ({
-  type: WeatherActionTypes.GET_USER_GEO_START,
-})
-
 export const getUserGeoFailure = (error) => ({
   type: WeatherActionTypes.GET_USER_GEO_FAILURE,
   payload: error
