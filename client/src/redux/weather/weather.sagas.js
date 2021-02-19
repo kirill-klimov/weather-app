@@ -15,7 +15,7 @@ import { setSearchMenu } from '../../redux/ui/ui.actions';
 // Find available locations
 function* queryData ({ payload }) {
   const { location } = payload;
-  const url = 'http://localhost:5000/api/query';
+  const url = '/api/query';
   try {
     const { data } = yield axios.get(url, {
       params: { location }
@@ -36,7 +36,7 @@ function* queryDataStart () {
 // Fetch weather data by woeid
 function* fetchData ({ payload }) {
   const { woeid } = payload;
-  const url = 'http://localhost:5000/api/location';
+  const url = '/api/location';
   try {
     const { data } = yield axios.get(url, {
       params: { woeid }
@@ -54,7 +54,7 @@ function* fetchDataStart () {
 
 // Initial fetch
 function* initFetchData () {
-  const url = 'http://localhost:5000/api/init';
+  const url = '/api/init';
   try {
     const { data } = yield axios.get(url);
     yield put(fetchDataSuccess(data));
@@ -82,7 +82,7 @@ function* _getUserGeo () {
     
   const { lat, long } = res;
 
-  const url = 'http://localhost:5000/api/latlong';
+  const url = '/api/latlong';
 
   try {
     const { data } = yield axios.get(url, {

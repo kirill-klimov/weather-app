@@ -47,3 +47,7 @@ export const getUserGeoFailure = (error) => ({
   type: WeatherActionTypes.GET_USER_GEO_FAILURE,
   payload: error
 })
+
+export const clearError = () => ({
+  type: WeatherActionTypes.CLEAR_ERROR
+})

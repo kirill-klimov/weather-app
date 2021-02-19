@@ -52,6 +52,11 @@ const weatherReducer = (state=init_state, action) => {
         loading: false,
         error: action.payload,
       }
+    case WeatherActionTypes.CLEAR_ERROR:
+      return {
+        ...state,
+        error: null
+      }
     default:
       return state;
   }

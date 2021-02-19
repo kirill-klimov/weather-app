@@ -9,6 +9,7 @@ export const WeatherActionTypes = {
   INIT_FETCH_DATA_START: 'INIT_FETCH_DATA_START',
   GET_USER_GEO_START: 'GET_USER_GEO_START',
   GET_USER_GEO_FAILURE: 'GET_USER_GEO_FAILURE',
+  CLEAR_ERROR: 'CLEAR_ERROR',
 }
 
 export const UnitTypes = {

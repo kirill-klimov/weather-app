@@ -2,6 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 import * as C from '../../style';
 import SyncLoader from "react-spinners/SyncLoader";
+import { useDispatch } from 'react-redux';
+import { clearError } from '../../redux/weather/weather.actions';
 
 import { motion, useAnimation } from 'framer-motion';
 
@@ -64,6 +66,13 @@ const Loader = ({ loading, error }) => {
   loading ? loaderControls.start("visible") : loaderControls.start("hidden");
   error ? errorControls.start("visible") : errorControls.start("hidden");
 
+  const dispatch = useDispatch();
+
+  const handleClose = async () => {
+    await errorControls.start("hidden")
+    dispatch(clearError());
+  }
+
   return (
     <Container>
       <LoaderContainer variants={variants} initial="hidden" animate={loaderControls}>
@@ -71,7 +80,7 @@ const Loader = ({ loading, error }) => {
       </LoaderContainer>
       <ErrorContainer variants={variants} initial="hidden" animate={errorControls}>
         <Message>{error ? (error.message ? error.message : "There was an error :(") : "There was an error :("}</Message>
-        <Close onClick={() =>  errorControls.start("hidden")}>✕</Close>
+        <Close onClick={handleClose}>✕</Close>
       </ErrorContainer>
     </Container>
   )
