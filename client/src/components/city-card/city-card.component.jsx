@@ -1,26 +1,39 @@
-import React, { useState } from 'react';
+import React from 'react';
 import LocationButton from '../location-button/location-button.component';
 import CityWeatherImage from '../city-weather-image/city-weather-image.component';
 import CityText from '../city-text/city-text.component';
+import { useDispatch, connect } from 'react-redux';
+import { setSearchMenu } from '../../redux/ui/ui.actions';
 
 import * as S from './city-card.styles.js';
 import CitySearch from '../city-search/city-search.component';
 
-const CityCard = () => {
-  const [hidden, setHidden] = useState(true);
+const CityCard = ({ searchMenu, data, unit }) => {
+  const dispatch = useDispatch();
+
+  const todayData = data ? data.consolidated_weather[0] : {};
+  const { weather_state_abbr } = todayData;
+  const title = data ? data.title : '';
+
   return (
     <S.Container>
       <S.ButtonsContainer>
-        <S.SearchButton onClick={() => setHidden(!hidden)}>Search for places</S.SearchButton>
+        <S.SearchButton onClick={() => dispatch(setSearchMenu(true))}>Search for places</S.SearchButton>
         <LocationButton />
       </S.ButtonsContainer>
-      <CityWeatherImage />
-      <CityText />
+      <CityWeatherImage weather_state_abbr={weather_state_abbr} />
+      <CityText title={title} unit={unit} {...todayData} />
       {
-        hidden ? null : <CitySearch setHidden={setHidden} />
+        searchMenu ? <CitySearch /> : null
       }
     </S.Container>
   );
 }
 
-export default CityCard;
+const mapStateToProps = state => ({ 
+  searchMenu: state.ui.searchMenu,
+  data: state.weather.data,
+  unit: state.weather.unit
+});
+
+export default connect(mapStateToProps)(CityCard);

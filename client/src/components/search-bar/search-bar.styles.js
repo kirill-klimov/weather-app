@@ -34,6 +34,7 @@ export const InputContainer = styled.div`
   padding: 10px;
   flex-grow: 1;
   align-items: center;
+  cursor: text;
 
   > svg {
     fill: ${ ({focus}) => focus ? C.White : C.InputGray };

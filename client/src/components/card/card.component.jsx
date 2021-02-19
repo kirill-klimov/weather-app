@@ -1,24 +1,54 @@
 import React from 'react';
 import * as S from './card.styles';
-import { useAnimation } from 'framer-motion';
 
-const Card = ({custom}) => {
-  const controls = useAnimation();
+import { UnitTypes } from '../../redux/weather/weather.types';
+import { toFahrenheit } from '../../utils';
 
-  controls.start({
-    transform: 'scale(1)',
-    transition: {delay: custom * 0.05}  
-  });
+const Card = (props) => {
+  const { custom, initial, variants, animate } = props;
+  const {
+    applicable_date,
+    max_temp,
+    min_temp,
+    weather_state_abbr,
+    unit
+  } = props;
+
+  const options = { weekday: 'short', day: 'numeric', month: 'short' };
+  const today = (new Date()).getDay();
+  const date = new Date(applicable_date);
 
   return (
-    <S.Container initial={{transform: 'scale(0)'}} custom={custom} animate={controls}>
-      <S.DayText>Tommorow</S.DayText>
+    <S.Container
+    custom={custom}
+    initial={initial}
+    variants={variants}
+    animate={animate} >
+      <S.DayText>
+        {
+          date.getDay() === (today + 1) ?
+          "Tommorow" :
+          date.toLocaleDateString("en-US", options)
+        }
+      </S.DayText>
       <S.ImageContainer>
-        <S.Image src="https://www.metaweather.com/static/img/weather/s.svg" alt="" />
+        <S.Image src={`https://www.metaweather.com/static/img/weather/${weather_state_abbr}.svg`} alt="weather state" />
       </S.ImageContainer>
       <S.TemperatureTextContainer>
-        <S.TemperatureText>16 °C</S.TemperatureText>
-        <S.TemperatureText>11 °C</S.TemperatureText>
+        <S.TemperatureText>
+          {
+            UnitTypes.Celsius === unit ?
+            Math.round(max_temp) + '°C' :
+            Math.round(toFahrenheit(max_temp)) + '°F'
+          }
+        </S.TemperatureText>
+        <S.TemperatureText>
+          {
+            UnitTypes.Celsius === unit ?
+            Math.round(min_temp) + '°C' :
+            Math.round(toFahrenheit(min_temp)) + '°F'
+          }
+        </S.TemperatureText>
       </S.TemperatureTextContainer>
     </S.Container>
   )

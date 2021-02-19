@@ -1,7 +1,7 @@
 import React from 'react';
 import CardList from '../card-list/card-list.component';
 import Units from '../units/units.component';
-import Highlights from '../highlights/highlights.component';
+import HighlightList from '../highlight-list/highlight-list.component';
 import * as S from './data.styles';
 import Footer from '../footer/footer.component';
 
@@ -11,7 +11,7 @@ const Data = () => {
       <S.ContentWrap>
         <Units />
         <CardList />
-        <Highlights />
+        <HighlightList />
         <Footer />
       </S.ContentWrap>
     </S.Container>

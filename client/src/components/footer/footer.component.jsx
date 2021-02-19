@@ -14,7 +14,7 @@ export const Text = styled.div`
 const Footer = () => {
   return (
     <Container>
-      <Text>Kirill Klimov - devChallanges.io</Text>
+      <Text>Kirill Klimov - devchallanges.io</Text>
     </Container>
   )
 }

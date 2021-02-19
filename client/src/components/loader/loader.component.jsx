@@ -70,7 +70,7 @@ const Loader = ({ loading, error }) => {
         <SyncLoader color={C.White} size={8} />
       </LoaderContainer>
       <ErrorContainer variants={variants} initial="hidden" animate={errorControls}>
-        <Message>There was an error :(</Message>
+        <Message>{error ? (error.message ? error.message : "There was an error :(") : "There was an error :("}</Message>
         <Close onClick={() =>  errorControls.start("hidden")}>✕</Close>
       </ErrorContainer>
     </Container>
